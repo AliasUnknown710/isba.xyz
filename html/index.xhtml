@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to InfoSec by Alex!</title>
-    <link rel="stylesheet" href="landing.css">
+    <link rel="stylesheet" href="css/landing.css">
     <!-- Security Headers -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -13,7 +13,7 @@
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
     <!-- Prevent URL injection by sanitizing URLs in client-side scripts and using rel="noopener noreferrer" for external links -->
-    <script src="urlsan.js"></script>
+    <script src="js/urlsan.js"></script>
 </head>
 <body>
     <main>
@@ -24,20 +24,31 @@
         </section>
         <section id="form-container"></section>
     </main>
-    <!-- Python scripts should be securely handled server-side; avoid exposing .py files directly -->
-    <script src="signup.py" type="text/python"></script>
-    <script src="login.py" type="text/python"></script>
+    <!-- Server-side logic for signup and login should be handled by your backend (e.g., Flask, Django, etc.). Do not expose .py files directly to the client. -->
+    <script src="js/loginform.js"></script>
+    <script src="js/signupform.js"></script>
     <script>
-        // Example JS to toggle forms (assuming Python scripts render forms)
-        document.getElementById('signup-btn').onclick = function() {
-            window.pywebview.api.show_signup_form();
-        };
-        document.getElementById('login-btn').onclick = function() {
-            window.pywebview.api.show_login_form();
-        };
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginBtn = document.getElementById('login-btn');
+            const signupBtn = document.getElementById('signup-btn');
+            const formContainer = document.getElementById('form-container');
 
-        // CSRF token example (should be generated server-side and injected)
-        // document.cookie = "csrftoken=YOUR_SECURE_TOKEN; Secure; SameSite=Strict; HttpOnly";
+            loginBtn.addEventListener('click', function() {
+                // Assuming renderLoginForm is defined in loginform.js
+                if (typeof renderLoginForm === 'function') {
+                    formContainer.innerHTML = '';
+                    renderLoginForm(formContainer, '/api/login'); // Pass endpoint to form renderer
+                }
+            });
+
+            signupBtn.addEventListener('click', function() {
+                // Assuming renderSignupForm is defined in signupform.js
+                if (typeof renderSignupForm === 'function') {
+                    formContainer.innerHTML = '';
+                    renderSignupForm(formContainer, '/api/signup'); // Pass endpoint to form renderer
+                }
+            });
+        });
     </script>
     
 </body>
