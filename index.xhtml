@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to InfoSec by Alex!</title>
+    <link rel="stylesheet" href="landing.css">
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <!-- Prevent URL injection by sanitizing URLs in client-side scripts and using rel="noopener noreferrer" for external links -->
+    <script>
+        // Utility function to sanitize URLs before navigation or assignment
+        function sanitizeUrl(url) {
+            try {
+                const parsed = new URL(url, window.location.origin);
+                // Only allow same-origin or specific trusted domains
+                if (parsed.origin === window.location.origin) {
+                    return parsed.href;
+                }
+            } catch (e) {
+                // Invalid URL
+            }
+            return '/';
+        }
+        // Example usage:
+        // window.location.href = sanitizeUrl(userInputUrl);
+    </script>
+</head>
+<body>
+    <main>
+        <h1>Welcome to InfoSec by Alex!</h1>
+        <section class="auth-options">
+            <button id="signup-btn" type="button">Sign Up</button>
+            <button id="login-btn" type="button">Log In</button>
+        </section>
+        <section id="form-container"></section>
+    </main>
+    <!-- Python scripts should be securely handled server-side; avoid exposing .py files directly -->
+    <script src="signup.py" type="text/python"></script>
+    <script src="login.py" type="text/python"></script>
+    <script>
+        // Example JS to toggle forms (assuming Python scripts render forms)
+        document.getElementById('signup-btn').onclick = function() {
+            window.pywebview.api.show_signup_form();
+        };
+        document.getElementById('login-btn').onclick = function() {
+            window.pywebview.api.show_login_form();
+        };
+
+        // CSRF token example (should be generated server-side and injected)
+        // document.cookie = "csrftoken=YOUR_SECURE_TOKEN; Secure; SameSite=Strict; HttpOnly";
+    </script>
+    
+</body>
+</html>
