@@ -10,6 +10,9 @@
             background: url('img/secure-logo.png') center center no-repeat fixed;
             background-size: 500px 500px;
             color: #39FF14;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         header, footer {
             text-align: center;
@@ -31,10 +34,17 @@
             background: rgba(30,30,47,0.7);
             border-radius: 12px;
             padding: 2rem;
+            flex: 1 0 auto;
         }
         ul {
             color: #39FF14;
             font-size: 1.1rem;
+        }
+        footer {
+            flex-shrink: 0;
+            width: 100%;
+            position: relative;
+            bottom: 0;
         }
     </style>
 </head>
