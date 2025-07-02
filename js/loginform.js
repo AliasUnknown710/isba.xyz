@@ -61,7 +61,15 @@ function renderLoginForm(container, endpoint = '/api/login') {
             if (response.ok) {
                 messageDiv.textContent = result.message || 'Login successful!';
                 messageDiv.style.color = 'green';
-                // Optionally redirect or update UI here
+                // Refresh session token for security, then redirect
+                try {
+                    await fetch('/api/refresh-token', { method: 'POST', credentials: 'include' });
+                } catch (e) {
+                    // Optionally handle token refresh error
+                }
+                setTimeout(function() {
+                    window.location.href = 'dashboard.html';
+                }, 1000);
             } else {
                 messageDiv.textContent = result.error || 'Login failed.';
                 messageDiv.style.color = 'red';

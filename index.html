@@ -34,22 +34,19 @@
             const formContainer = document.getElementById('form-container');
 
             loginBtn.addEventListener('click', function() {
-                // Assuming renderLoginForm is defined in loginform.js
                 if (typeof renderLoginForm === 'function') {
                     formContainer.innerHTML = '';
-                    renderLoginForm(formContainer, '/api/login'); // Pass endpoint to form renderer
+                    renderLoginForm(formContainer, '/api/login');
                 }
             });
 
             signupBtn.addEventListener('click', function() {
-                // Assuming renderSignupForm is defined in signupform.js
                 if (typeof renderSignupForm === 'function') {
                     formContainer.innerHTML = '';
-                    renderSignupForm(formContainer, '/api/signup'); // Pass endpoint to form renderer
+                    renderSignupForm(formContainer, '/api/signup');
                 }
             });
         });
     </script>
-    
 </body>
 </html>

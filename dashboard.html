@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - InfoSec by Alex</title>
+    <link rel="stylesheet" href="css/landing.css">
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+</head>
+<body>
+    <main>
+        <h1>Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+        <section>
+            <p>Welcome! You are logged in.</p>
+        </section>
+    </main>
+    <script>
+    // Example: Refresh session token after login (should be replaced with real API call)
+    async function refreshSessionToken() {
+        try {
+            const response = await fetch('/api/refresh-token', { method: 'POST', credentials: 'include' });
+            if (response.ok) {
+                // Optionally update local/session storage or cookies here
+                console.log('Session token refreshed');
+            } else {
+                console.warn('Session token refresh failed');
+            }
+        } catch (e) {
+            console.error('Network error during token refresh');
+        }
+    }
+    // Call on page load
+    refreshSessionToken();
+    </script>
+</body>
+</html>
