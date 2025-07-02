@@ -21,6 +21,7 @@
             width: 100%;
             position: relative;
             bottom: 0;
+            color: #fff;
         }
         .logo-bg {
             position: fixed;
@@ -61,6 +62,10 @@
         nav a:hover {
             color: #FFD600;
         }
+        .footer-copyright {
+            color: #FFD600;
+            font-weight: bold;
+        }
     </style>
     <!-- Security Headers -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">
@@ -84,7 +89,7 @@
         <section id="form-container"></section>
     </main>
     <footer>
-        &copy; 2025 InfoSec by Alex
+        <span class="footer-copyright">&copy; 2025 InfoSec by Alex</span>
     </footer>
     <!-- Server-side logic for signup and login should be handled by your backend (e.g., Flask, Django, etc.). Do not expose .py files directly to the client. -->
     <script src="js/loginform.js"></script>
