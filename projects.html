@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - InfoSec by Alex</title>
+    <link rel="stylesheet" href="css/landing.css">
+    <style>
+        body {
+            background: url('img/secure-logo.png') center center no-repeat fixed;
+            background-size: 500px 500px;
+            color: #39FF14;
+        }
+        .proj-layout {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .proj-list {
+            flex: 1;
+            list-style: disc;
+            padding-left: 2rem;
+            color: #39FF14;
+        }
+        .proj-list li {
+            cursor: pointer;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+            text-decoration: underline;
+        }
+        .proj-list li:hover {
+            color: #FFD600;
+        }
+        .proj-video-container {
+            flex: 2;
+            min-height: 400px;
+            background: rgba(30,30,47,0.7);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(30,30,47,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .proj-video {
+            width: 100%;
+            height: 350px;
+            border: none;
+            border-radius: 8px;
+            background: #000;
+        }
+        header, footer {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(30,30,47,0.85);
+        }
+        nav a {
+            color: #39FF14;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #FFD600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="certifications.html">Certifications</a>
+            <a href="projects.html">Projects</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Projects</h1>
+        <div class="proj-layout">
+            <ul class="proj-list" id="proj-list">
+                <!-- List items will be injected here -->
+            </ul>
+            <div class="proj-video-container">
+                <video id="proj-video" class="proj-video" src="" controls></video>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <a href="sitemap.html">Sitemap</a> | &copy; 2025 InfoSec by Alex
+    </footer>
+    <script>
+    // Example project data
+    const projects = [
+        { title: 'Network Scanner', video: 'videos/project1.mp4', desc: 'A fast network scanner.' },
+        { title: 'Password Manager', video: 'videos/project2.mp4', desc: 'A secure password manager.' },
+        { title: 'SIEM Dashboard', video: 'videos/project3.mp4', desc: 'A custom SIEM dashboard.' }
+    ];
+    const projList = document.getElementById('proj-list');
+    const projVideo = document.getElementById('proj-video');
+    projects.forEach((proj, idx) => {
+        const li = document.createElement('li');
+        li.textContent = proj.title + ' - ' + proj.desc;
+        li.onclick = () => {
+            projVideo.src = proj.video;
+            projVideo.play();
+        };
+        projList.appendChild(li);
+    });
+    // Show first project by default
+    if (projects.length > 0) projVideo.src = projects[0].video;
+    </script>
+</body>
+</html>

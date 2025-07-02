@@ -47,10 +47,37 @@ function renderLoginForm(container, endpoint = '/api/login') {
     // Handle form submission
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
-        const username = usernameInput.value;
+        const username = usernameInput.value.trim();
         const password = passwordInput.value;
         messageDiv.textContent = '';
         submitBtn.disabled = true;
+        // Highly secure input validation
+        const wittyErrors = [
+            "Not here bucko!",
+            "Nice try, Wrong Site!",
+            "That doesn't look right!",
+            "Halt! Who goes there?",
+            "Access denied, friend-o!"
+        ];
+        const usernameRegex = /^[a-zA-Z0-9_\-]{3,32}$/;
+        if (!usernameRegex.test(username)) {
+            messageDiv.textContent = wittyErrors[Math.floor(Math.random() * wittyErrors.length)] + " (Invalid username)";
+            messageDiv.style.color = 'red';
+            submitBtn.disabled = false;
+            return;
+        }
+        if (password.length < 8 || password.length > 64) {
+            messageDiv.textContent = wittyErrors[Math.floor(Math.random() * wittyErrors.length)] + " (Password must be 8-64 characters)";
+            messageDiv.style.color = 'red';
+            submitBtn.disabled = false;
+            return;
+        }
+        if (/\s/.test(password)) {
+            messageDiv.textContent = wittyErrors[Math.floor(Math.random() * wittyErrors.length)] + " (No spaces in password)";
+            messageDiv.style.color = 'red';
+            submitBtn.disabled = false;
+            return;
+        }
         try {
             const response = await fetch(endpoint, {
                 method: 'POST',
@@ -71,11 +98,11 @@ function renderLoginForm(container, endpoint = '/api/login') {
                     window.location.href = 'dashboard.html';
                 }, 1000);
             } else {
-                messageDiv.textContent = result.error || 'Login failed.';
+                messageDiv.textContent = result.error || wittyErrors[Math.floor(Math.random() * wittyErrors.length)];
                 messageDiv.style.color = 'red';
             }
         } catch (err) {
-            messageDiv.textContent = 'Network error.';
+            messageDiv.textContent = wittyErrors[Math.floor(Math.random() * wittyErrors.length)] + ' (Network error)';
             messageDiv.style.color = 'red';
         } finally {
             submitBtn.disabled = false;

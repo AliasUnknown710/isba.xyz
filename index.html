@@ -6,6 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to InfoSec by Alex!</title>
     <link rel="stylesheet" href="css/landing.css">
+    <style>
+        body {
+            background: url('img/secure-logo.png') center center no-repeat fixed;
+            background-size: 500px 500px;
+        }
+        header, footer {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(30,30,47,0.85);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header-title {
+            flex: 1;
+            text-align: center;
+            font-size: 2rem;
+            color: #39FF14;
+        }
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        nav a {
+            color: #39FF14;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #FFD600;
+        }
+    </style>
     <!-- Security Headers -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -16,14 +49,19 @@
     <script src="js/urlsan.js"></script>
 </head>
 <body>
-    <main>
-        <h1>Welcome to InfoSec by Alex!</h1>
-        <section class="auth-options">
+    <header>
+        <div class="header-title">Welcome to InfoSec by Alex!</div>
+        <div class="header-buttons">
             <button id="signup-btn" type="button">Sign Up</button>
             <button id="login-btn" type="button">Log In</button>
-        </section>
+        </div>
+    </header>
+    <main>
         <section id="form-container"></section>
     </main>
+    <footer>
+        <a href="sitemap.html">Sitemap</a> | &copy; 2025 InfoSec by Alex
+    </footer>
     <!-- Server-side logic for signup and login should be handled by your backend (e.g., Flask, Django, etc.). Do not expose .py files directly to the client. -->
     <script src="js/loginform.js"></script>
     <script src="js/signupform.js"></script>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Certifications - InfoSec by Alex</title>
+    <link rel="stylesheet" href="css/landing.css">
+    <style>
+        body {
+            background: url('img/secure-logo.png') center center no-repeat fixed;
+            background-size: 500px 500px;
+            color: #39FF14;
+        }
+        .cert-layout {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .cert-list {
+            flex: 1;
+            list-style: disc;
+            padding-left: 2rem;
+            color: #39FF14;
+        }
+        .cert-list li {
+            cursor: pointer;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+            text-decoration: underline;
+        }
+        .cert-list li:hover {
+            color: #FFD600;
+        }
+        .cert-pdf-container {
+            flex: 2;
+            min-height: 400px;
+            background: rgba(30,30,47,0.7);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(30,30,47,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cert-pdf {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 8px;
+        }
+        header, footer {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(30,30,47,0.85);
+        }
+        nav a {
+            color: #39FF14;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #FFD600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="certifications.html">Certifications</a>
+            <a href="projects.html">Projects</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Professional Certifications</h1>
+        <div class="cert-layout">
+            <ul class="cert-list" id="cert-list">
+                <!-- List items will be injected here -->
+            </ul>
+            <div class="cert-pdf-container">
+                <iframe id="cert-pdf" class="cert-pdf" src="" title="Certification PDF"></iframe>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <a href="sitemap.html">Sitemap</a> | &copy; 2025 InfoSec by Alex
+    </footer>
+    <script>
+    // Example certification data
+    // Each PDF will be fetched via a worker endpoint, e.g. /api/cert-pdf?cert=ceh
+    const certifications = [
+        { title: 'Certified Ethical Hacker', workerParam: 'ceh' },
+        { title: 'CompTIA Security+', workerParam: 'securityplus' },
+        { title: 'CISSP', workerParam: 'cissp' }
+    ];
+    const certList = document.getElementById('cert-list');
+    const certPdf = document.getElementById('cert-pdf');
+    certifications.forEach((cert, idx) => {
+        const li = document.createElement('li');
+        li.textContent = cert.title;
+        li.onclick = () => {
+            certPdf.src = `/api/cert-pdf?cert=${encodeURIComponent(cert.workerParam)}`;
+        };
+        certList.appendChild(li);
+    });
+    // Show first cert by default
+    if (certifications.length > 0) certPdf.src = `/api/cert-pdf?cert=${encodeURIComponent(certifications[0].workerParam)}`;
+    </script>
+</body>
+</html>
