@@ -1,3 +1,59 @@
+/* Style login and signup forms to match privacy modal */
+.privacy-modal, .form-modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.privacy-content, .form-content {
+    background: #222;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: #39FF14;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-content label {
+    color: #39FF14;
+    display: block;
+    margin-top: 1rem;
+}
+.form-content input[type="text"],
+.form-content input[type="password"] {
+    width: 100%;
+    margin-bottom: 1rem;
+    background: #111;
+    color: #39FF14;
+    border: 1px solid #39FF14;
+    border-radius: 6px;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+.form-content button[type="submit"] {
+    background: #FFD600;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+.form-content #login-message,
+.form-content #signup-message {
+    margin-top: 1rem;
+}
 /* Base styles */
 body {
     background-color: #FFFFFF; /* White main background */
