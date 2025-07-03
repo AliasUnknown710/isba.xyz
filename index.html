@@ -12,6 +12,8 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
         }
         main {
             flex: 1 0 auto;
@@ -34,6 +36,57 @@
             background: url('img/secure-logo.png') center center no-repeat;
             background-size: 500px 500px;
             pointer-events: none;
+        }
+        .welcome-text {
+            position: absolute;
+            top: calc(50% - 300px); /* ~1 inch above logo */
+            left: 50%;
+            transform: translate(-50%, 0);
+            color: #39FF14;
+            font-size: 2rem;
+            z-index: 2;
+            text-align: center;
+        }
+        .button-row {
+            position: absolute;
+            top: calc(50% + 300px); /* ~1 inch below logo */
+            left: 50%;
+            transform: translate(-50%, 0);
+            display: flex;
+            gap: 2in;
+            z-index: 2;
+        }
+        .privacy-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.85);
+            color: #fff;
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .privacy-content {
+            background: #222;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            color: #fff;
+        }
+        .close-privacy {
+            background: #FFD600;
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
         }
         header, footer {
             text-align: center;
@@ -78,16 +131,31 @@
 </head>
 <body>
     <div class="logo-bg"></div>
-    <header>
-        <div class="header-title">Welcome to InfoSec by Alex!</div>
-        <div class="header-buttons">
-            <button id="signup-btn" type="button">Sign Up</button>
-            <button id="login-btn" type="button">Log In</button>
-        </div>
-    </header>
+    <div class="welcome-text">Welcome to InfoSec by Alex!</div>
+    <div class="button-row">
+        <button id="signup-btn" type="button">Sign Up</button>
+        <button id="login-btn" type="button">Log In</button>
+        <button id="privacy-btn" type="button">Privacy & Terms</button>
+    </div>
     <main>
         <section id="form-container"></section>
     </main>
+    <div class="privacy-modal" id="privacy-modal">
+        <div class="privacy-content">
+            <h2>Privacy Notice & Terms of Agreement</h2>
+            <p><strong>InfoSec by Alex</strong> is committed to protecting your privacy and ensuring the security of your information. By using this site, you agree to the following terms:</p>
+            <ul>
+                <li>Your personal data (such as username and email) is collected only for authentication and account management purposes.</li>
+                <li>We do not share your information with third parties except as required by law or for security investigations.</li>
+                <li>All data transmissions are encrypted and securely stored.</li>
+                <li>You are responsible for maintaining the confidentiality of your login credentials.</li>
+                <li>By using this site, you agree not to attempt unauthorized access, reverse engineering, or any activity that could compromise the security of InfoSec by Alex or its users.</li>
+                <li>For questions or concerns, contact the site administrator at <a href="mailto:admin@isba.xyz">admin@isba.xyz</a>.</li>
+            </ul>
+            <p>By continuing to use this site, you acknowledge and accept these terms and our privacy practices.</p>
+            <button class="close-privacy" id="close-privacy">Close</button>
+        </div>
+    </div>
     <footer>
         <span class="footer-copyright">&copy; 2025 InfoSec by Alex</span>
     </footer>
@@ -98,6 +166,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             const loginBtn = document.getElementById('login-btn');
             const signupBtn = document.getElementById('signup-btn');
+            const privacyBtn = document.getElementById('privacy-btn');
+            const privacyModal = document.getElementById('privacy-modal');
+            const closePrivacy = document.getElementById('close-privacy');
             const formContainer = document.getElementById('form-container');
 
             loginBtn.addEventListener('click', function() {
@@ -112,6 +183,13 @@
                     formContainer.innerHTML = '';
                     renderSignupForm(formContainer, '/api/signup');
                 }
+            });
+
+            privacyBtn.addEventListener('click', function() {
+                privacyModal.style.display = 'flex';
+            });
+            closePrivacy.addEventListener('click', function() {
+                privacyModal.style.display = 'none';
             });
         });
     </script>
