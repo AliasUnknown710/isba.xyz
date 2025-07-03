@@ -120,6 +120,13 @@ function renderSignupForm(container, endpoint = '/api/signup') {
         }
     });
 
+    // Add close on background click
+    modalWrapper.addEventListener('click', function(e) {
+        if (e.target === modalWrapper) {
+            container.innerHTML = '';
+        }
+    });
+
     formBox.appendChild(form);
     modalWrapper.appendChild(formBox);
     container.innerHTML = '';
