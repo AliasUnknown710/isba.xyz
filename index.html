@@ -162,36 +162,6 @@
     <!-- Server-side logic for signup and login should be handled by your backend (e.g., Flask, Django, etc.). Do not expose .py files directly to the client. -->
     <script src="js/loginform.js"></script>
     <script src="js/signupform.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginBtn = document.getElementById('login-btn');
-            const signupBtn = document.getElementById('signup-btn');
-            const privacyBtn = document.getElementById('privacy-btn');
-            const privacyModal = document.getElementById('privacy-modal');
-            const closePrivacy = document.getElementById('close-privacy');
-            const formContainer = document.getElementById('form-container');
-
-            loginBtn.addEventListener('click', function() {
-                if (typeof renderLoginForm === 'function') {
-                    formContainer.innerHTML = '';
-                    renderLoginForm(formContainer, '/api/login');
-                }
-            });
-
-            signupBtn.addEventListener('click', function() {
-                if (typeof renderSignupForm === 'function') {
-                    formContainer.innerHTML = '';
-                    renderSignupForm(formContainer, '/api/signup');
-                }
-            });
-
-            privacyBtn.addEventListener('click', function() {
-                privacyModal.style.display = 'flex';
-            });
-            closePrivacy.addEventListener('click', function() {
-                privacyModal.style.display = 'none';
-            });
-        });
-    </script>
+    <script src="js/index.js"></script>
 </body>
 </html>
