@@ -46,6 +46,11 @@ function renderSignupForm(container, endpoint) {
     submitBtn.type = 'submit';
     submitBtn.textContent = 'Sign Up';
 
+    // reCAPTCHA widget
+    const recaptchaDiv = document.createElement('div');
+    recaptchaDiv.className = 'g-recaptcha';
+    recaptchaDiv.setAttribute('data-sitekey', '6LffGXkrAAAAAMyqY7Fp4l4wMRcYfGJvwiSmwGNu');
+
     // Message area
     const messageDiv = document.createElement('div');
     messageDiv.id = 'signup-message';
@@ -57,6 +62,7 @@ function renderSignupForm(container, endpoint) {
     form.appendChild(passwordInput);
     form.appendChild(confirmLabel);
     form.appendChild(confirmInput);
+    form.appendChild(recaptchaDiv);
     form.appendChild(submitBtn);
     form.appendChild(messageDiv);
 

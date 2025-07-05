@@ -57,6 +57,11 @@ function renderLoginForm(container, endpoint) {
         }
     });
 
+    // reCAPTCHA widget
+    const recaptchaDiv = document.createElement('div');
+    recaptchaDiv.className = 'g-recaptcha';
+    recaptchaDiv.setAttribute('data-sitekey', '6LffGXkrAAAAAMyqY7Fp4l4wMRcYfGJvwiSmwGNu');
+
     // Message area
     const messageDiv = document.createElement('div');
     messageDiv.id = 'login-message';
@@ -66,6 +71,7 @@ function renderLoginForm(container, endpoint) {
     form.appendChild(usernameInput);
     form.appendChild(passwordLabel);
     form.appendChild(passwordInput);
+    form.appendChild(recaptchaDiv);
     form.appendChild(submitBtn);
     form.appendChild(forgotLink);
     form.appendChild(messageDiv);

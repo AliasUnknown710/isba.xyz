@@ -35,9 +35,15 @@ export function renderForgotPasswordModal(container) {
     userInput.required = true;
     form.appendChild(userInput);
 
+    // reCAPTCHA widget
+    const recaptchaDiv = document.createElement('div');
+    recaptchaDiv.className = 'g-recaptcha';
+    recaptchaDiv.setAttribute('data-sitekey', '6LffGXkrAAAAAMyqY7Fp4l4wMRcYfGJvwiSmwGNu');
+
     const submitBtn = document.createElement('button');
     submitBtn.type = 'submit';
     submitBtn.textContent = 'Send Reset Link';
+    form.appendChild(recaptchaDiv);
     form.appendChild(submitBtn);
 
     const messageDiv = document.createElement('div');
