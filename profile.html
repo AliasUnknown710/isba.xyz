@@ -7,7 +7,9 @@
     <title>Profile - InfoSec by Alex</title>
     <link rel="stylesheet" href="css/sitestyles.css">
     <script>
+      // Set the correct Cloudflare Worker URLs for profile actions
       window.CLOUDFLARE_API_BASE_URL = "https://your-worker-url.workers.dev";
+      window.CLOUDFLARE_DELETE_PROFILE_URL = "https://deleteprofileworker.alexliss216-ad0.workers.dev";
     </script>
     <!-- Security Headers -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">

@@ -1,5 +1,5 @@
 // signupform.js
-function renderSignupForm(container, endpoint = '/api/signup') {
+function renderSignupForm(container, endpoint) {
     // Modal-style wrapper for centering and matching privacy notice
     const modalWrapper = document.createElement('div');
     modalWrapper.className = 'form-modal';
@@ -97,8 +97,10 @@ function renderSignupForm(container, endpoint = '/api/signup') {
             return;
         }
         submitBtn.disabled = true;
+        // Use the global Cloudflare Worker URL if not provided
+        const signupEndpoint = endpoint || (window.CLOUDFLARE_SIGNUP_URL ? window.CLOUDFLARE_SIGNUP_URL : '/api/signup');
         try {
-            const response = await fetch(endpoint, {
+            const response = await fetch(signupEndpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })

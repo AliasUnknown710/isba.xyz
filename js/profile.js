@@ -1,10 +1,10 @@
 // This script handles the user profile page functionality
 // It fetches user data, allows password changes, and account deletion.
 
-async function apiRequest(path, method, data) {
+async function apiRequest(path, method, data, customBase) {
     // The backend URL is set as a secret environment variable in the Cloudflare Worker
     // The worker will proxy requests to the Python backend securely
-    const apiBase = window.CLOUDFLARE_API_BASE_URL; // Provided by <script> tag in HTML
+    const apiBase = customBase || window.CLOUDFLARE_API_BASE_URL; // Provided by <script> tag in HTML
     const resp = await fetch(apiBase + path, {
         method,
         headers: {
@@ -64,7 +64,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
         if (!confirm('Are you sure you want to delete your account? This cannot be undone.')) return;
         try {
-            await apiRequest('/user/delete', 'POST', { password: delpw });
+            // Use the dedicated Cloudflare Worker for delete profile if available
+            const deleteBase = window.CLOUDFLARE_DELETE_PROFILE_URL || window.CLOUDFLARE_API_BASE_URL;
+            await apiRequest('/user/delete', 'POST', { password: delpw }, deleteBase);
             msg.textContent = 'Account deleted. Logging out...';
             msg.style.color = '#ff1744';
             setTimeout(() => {

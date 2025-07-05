@@ -1,6 +1,6 @@
 // loginform.js
 
-function renderLoginForm(container, endpoint = '/api/login') {
+function renderLoginForm(container, endpoint) {
     // Modal-style wrapper for centering and matching privacy notice
     const modalWrapper = document.createElement('div');
     modalWrapper.className = 'form-modal';
@@ -32,10 +32,30 @@ function renderLoginForm(container, endpoint = '/api/login') {
     passwordInput.name = 'password';
     passwordInput.required = true;
 
+
     // Submit button
     const submitBtn = document.createElement('button');
     submitBtn.type = 'submit';
     submitBtn.textContent = 'Login';
+
+    // Forgotten password link
+    const forgotLink = document.createElement('a');
+    forgotLink.href = '#';
+    forgotLink.textContent = 'Forgot Password?';
+    forgotLink.style.display = 'block';
+    forgotLink.style.marginTop = '1rem';
+    forgotLink.style.color = '#39FF14';
+    forgotLink.style.textAlign = 'center';
+    forgotLink.style.textDecoration = 'underline';
+    forgotLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Dynamically load and show the forgot password modal
+        if (window.renderForgotPasswordModal) {
+            window.renderForgotPasswordModal(document.getElementById('form-container'));
+        } else {
+            alert('Password reset coming soon!');
+        }
+    });
 
     // Message area
     const messageDiv = document.createElement('div');
@@ -47,6 +67,7 @@ function renderLoginForm(container, endpoint = '/api/login') {
     form.appendChild(passwordLabel);
     form.appendChild(passwordInput);
     form.appendChild(submitBtn);
+    form.appendChild(forgotLink);
     form.appendChild(messageDiv);
 
     // Handle form submission
@@ -83,8 +104,10 @@ function renderLoginForm(container, endpoint = '/api/login') {
             submitBtn.disabled = false;
             return;
         }
+        // Use the global Cloudflare Worker URL if not provided
+        const loginEndpoint = endpoint || (window.CLOUDFLARE_LOGIN_URL ? window.CLOUDFLARE_LOGIN_URL : '/api/login');
         try {
-            const response = await fetch(endpoint, {
+            const response = await fetch(loginEndpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })

@@ -7,7 +7,9 @@
     <title>Welcome to InfoSec by Alex!</title>
     <link rel="stylesheet" href="css/sitestyles.css">
     <script>
-      window.CLOUDFLARE_API_BASE_URL = "https://your-worker-url.workers.dev";
+      // Set the correct Cloudflare Worker URLs for login and signup
+      window.CLOUDFLARE_LOGIN_URL = "https://loginworker.alexliss216-ad0.workers.dev";
+      window.CLOUDFLARE_SIGNUP_URL = "https://signupworker.alexliss216-ad0.workers.dev";
     </script>
     <style>
         body {
@@ -173,6 +175,7 @@
         <span class="footer-copyright">&copy; 2025 InfoSec by Alex</span>
     </footer>
     <!-- Server-side logic for signup and login should be handled by your backend (e.g., Flask, Django, etc.). Do not expose .py files directly to the client. -->
+    <script src="js/forgotpw.js"></script>
     <script src="js/loginform.js"></script>
     <script src="js/signupform.js"></script>
     <script src="js/index.js"></script>
