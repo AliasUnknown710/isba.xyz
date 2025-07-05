@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - InfoSec by Alex</title>
+    <link rel="stylesheet" href="css/landing.css">
+    <script>
+      window.CLOUDFLARE_API_BASE_URL = "https://your-worker-url.workers.dev";
+    </script>
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <style>
+        body {
+            background: url('img/secure-logo.png') center center no-repeat fixed;
+            background-size: 500px 500px;
+            color: #39FF14;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+        .profile-box {
+            background: #222;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 500px;
+            margin: 2rem auto;
+            color: #39FF14;
+            box-shadow: 0 0 24px #39FF14AA;
+        }
+        label {
+            color: #39FF14;
+            display: block;
+            margin-top: 1rem;
+        }
+        input[type="password"] {
+            width: 100%;
+            margin-bottom: 1rem;
+            background: #111;
+            color: #39FF14;
+            border: 1px solid #39FF14;
+            border-radius: 6px;
+            padding: 0.5rem;
+            box-sizing: border-box;
+        }
+        button {
+            background: #FFD600;
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        .danger {
+            background: #ff1744;
+            color: #fff;
+            margin-left: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="certifications.html">Certifications</a>
+            <a href="projects.html">Projects</a>
+        </nav>
+    </header>
+    <main>
+        <div class="profile-box">
+            <h1>Your Profile</h1>
+            <div id="user-info">
+                <p><strong>Username:</strong> <span id="profile-username">(loading...)</span></p>
+                <p><strong>Email:</strong> <span id="profile-email">(loading...)</span></p>
+            </div>
+            <hr>
+            <h2>Change Password</h2>
+            <form id="change-password-form">
+                <label for="current-password">Current Password:</label>
+                <input type="password" id="current-password" name="current-password" required>
+                <label for="new-password">New Password:</label>
+                <input type="password" id="new-password" name="new-password" required>
+                <button type="submit">Change Password</button>
+                <div id="change-password-message"></div>
+            </form>
+            <hr>
+            <h2>Delete Account</h2>
+            <form id="delete-account-form">
+                <label for="delete-password">Confirm Password:</label>
+                <input type="password" id="delete-password" name="delete-password" required>
+                <button type="submit" class="danger">Delete Account</button>
+                <div id="delete-account-message"></div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <a href="sitemap.html">Sitemap</a> | <span class="footer-copyright">&copy; 2025 InfoSec by Alex</span>
+    </footer>
+    <script src="js/profile.js"></script>
+</body>
+</html>
